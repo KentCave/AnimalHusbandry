@@ -2,68 +2,117 @@
 <Buildings>
 
 	<!-- Base Worktable -->
+	
+	<ThingDef Name="AH_Base" Abstract="True">
+	
+		<category>Building</category>
+		<soundImpactDefault>BulletImpactMetal</soundImpactDefault>
+		<selectable>true</selectable>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+		<repairEffect>Repair</repairEffect>
+		<leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+		<filthLeaving>BuildingRubble</filthLeaving>
+		<castEdgeShadows>false</castEdgeShadows>
+		<staticSunShadowHeight>0.20</staticSunShadowHeight>
+		<AltitudeLayer>Building</AltitudeLayer>
+		<minifiedDef>MinifiedFurniture</minifiedDef>
+		<tickerType>Normal</tickerType>
+		
+	</ThingDef>	
 
-<ThingDef ParentName="BuildingBase">
+	<ThingDef ParentName="AH_Base">
+	
 		<defName>RationTank</defName>
 		<label>ration tank</label>
-		<description>A tank that process base ration into pellets</description>
 		<thingClass>Kubouch.Building_UniversalFermenter</thingClass>
+		<description>A tank that process Animal Ration into pellets. Don´t place me outside, although a hightech machine, I wont function well in extreme tempertures.</description>		
 		<graphicData>
 			<texPath>Things/Building/RationTank</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
 			<damageData>
 				<rect>(0.05,0.1,0.9,0.9)</rect>
 			</damageData>
 			<drawSize>(3,2)</drawSize>
 		</graphicData>
 		<size>(3,2)</size>
-		<minifiedDef>MinifiedFurniture</minifiedDef>
-		<CastEdgeShadows>true</CastEdgeShadows>
-		<altitudeLayer>Building</altitudeLayer>
 		<passability>PassThroughOnly</passability>
-		<fillPercent>0.45</fillPercent>
 		<pathCost>60</pathCost>
+		<fillPercent>0.45</fillPercent>	
+		<altitudeLayer>Building</altitudeLayer>
+		<rotatable>true</rotatable>
+		<DesignationCategory>Production</DesignationCategory>		
 		<statBases>
-			<WorkToBuild>2500</WorkToBuild>
+			<WorkToBuild>3000</WorkToBuild>
 			<Mass>10</Mass>
-			<MaxHitPoints>100</MaxHitPoints>
+			<MaxHitPoints>200</MaxHitPoints>
 			<Flammability>1.0</Flammability>
 		</statBases>
 		<stuffCategories>
+			<li>Stony</li>
 			<li>Metallic</li>
-			<li>Woody</li>
+			<li>Precious</li>
 		</stuffCategories>
-		<costStuffCount>80</costStuffCount>
+		<costStuffCount>75</costStuffCount>
 		<costList>
-			<Component>1</Component>
+			<Component>5</Component>
+			<ElectronicComponents>2</ElectronicComponents>
+			<Mechanism>3</Mechanism>
 		</costList>
-		<rotatable>true</rotatable>
-		<DesignationCategory>Production</DesignationCategory>
-		<tickerType>Rare</tickerType>
+		<researchPrerequisites>
+			<li>SK_LivestockII</li>
+		</researchPrerequisites>
+
 		<comps>
 			<li Class="CompProperties_Forbiddable"/>
 			<li Class="Kubouch.CompProperties_UniversalFermenter">
 				<products>
 					<li>
-						<thingDef>Pellets</thingDef>
+						<thingDef>PelletsV</thingDef>
 						<ingredientFilter>
-							<thingDefs><li>AnimalRation</li></thingDefs>
+							<thingDefs>
+								<li>AnimalRationV</li>
+							</thingDefs>
 						</ingredientFilter>
 						<temperatureSafe>
-							<min>-10</min>
-							<max>50</max>
+							<min>-30</min>
+							<max>60</max>
 						</temperatureSafe>
 						<temperatureIdeal>
-							<min>-5</min>
-							<max>45</max>
+							<min>-20</min>
+							<max>50</max>
 						</temperatureIdeal>
 						<progressPerDegreePerTick>5</progressPerDegreePerTick>
-						<baseFermentationDuration>60000</baseFermentationDuration>
+						<baseFermentationDuration>80000</baseFermentationDuration>
 						<maxCapacity>200</maxCapacity>
 						<speedLessThanSafe>0.5</speedLessThanSafe>
 						<speedMoreThanSafe>1</speedMoreThanSafe>
 						<efficiency>1</efficiency>
 					</li>
+					<li>
+						<thingDef>PelletsP</thingDef>
+						<ingredientFilter>
+							<thingDefs>
+								<li>AnimalRationP</li>
+							</thingDefs>
+						</ingredientFilter>
+						<temperatureSafe>
+							<min>-30</min>
+							<max>60</max>
+						</temperatureSafe>
+						<temperatureIdeal>
+							<min>-20</min>
+							<max>50</max>
+						</temperatureIdeal>
+						<progressPerDegreePerTick>5</progressPerDegreePerTick>
+						<baseFermentationDuration>120000</baseFermentationDuration>
+						<maxCapacity>200</maxCapacity>
+						<speedLessThanSafe>0.5</speedLessThanSafe>
+						<speedMoreThanSafe>1</speedMoreThanSafe>
+						<efficiency>1</efficiency>
+					</li>
+					
 				</products>
 			</li>
 			<li Class="CompProperties_Glower">
@@ -76,13 +125,11 @@
 				<startElectricalFires>true</startElectricalFires>
 				<soundPowerOn>PowerOnSmall</soundPowerOn>
 				<soundPowerOff>PowerOffSmall</soundPowerOff>
-				<basePowerConsumption>30</basePowerConsumption>
+				<basePowerConsumption>100</basePowerConsumption>
 			</li>
 			<li Class="SK.CompProperties_AutoFlicker"/>    
 		</comps>
-		<researchPrerequisites>
-			<li>Brewing</li>
-		</researchPrerequisites>
+		
 	</ThingDef>
 	
 </Buildings>
